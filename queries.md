@@ -62,6 +62,7 @@ GROUP BY City;
 
 ## delete all users that have no orders. Should delete 17 (or 18 if you haven't deleted the record added) records.
 
-Select CustomerName FROM Customers
-WHERE CustomerID != ANY
-(SELECT CustomerID FROM Orders); -- Not working
+DELETE FROM Customers
+WHERE CustomerID IN
+(SELECT CustomerID as C2 FROM Customers
+EXCEPT SELECT CustomerID FROM Orders);
